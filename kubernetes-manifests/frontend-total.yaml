@@ -15,7 +15,8 @@ spec:
   selector:
     app: acmefit
     service: frontend
-  type: LoadBalancer
+#  type: LoadBalancer
+#  type: NodePort
 ---
 apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
@@ -67,3 +68,30 @@ spec:
         ports:
         - containerPort: 3000
           name: frontend
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+spec:
+  rules:
+  - host: acme-fitness.home-wl1.tkg.vmware.work.mbentley.net
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: frontend
+              port:
+                number: 80
+  - host: acme-fitness.home-wl2.tkg.vmware.work.mbentley.net
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: frontend
+              port:
+                number: 80

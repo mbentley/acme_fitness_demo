@@ -1,3 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: catalogmongodata
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 4Gi
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -58,11 +69,11 @@ spec:
             - mountPath: /docker-entrypoint-initdb.d
               name: mongo-initdb
       volumes:
-        - name: mongodata
-          emptyDir: {}
+#        - name: mongodata
+#          emptyDir: {}
         - name: mongo-initdb
           configMap:
             name: catalog-initdb-config
-#        - name: mongodata
-#          persistentVolumeClaim:
-#            claimName: mongodata
+        - name: mongodata
+          persistentVolumeClaim:
+            claimName: catalogmongodata

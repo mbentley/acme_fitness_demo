@@ -18,6 +18,21 @@ Deployment to a single cluster can executed using `single_cluster_deploy.sh`.
 
 Deployment to multiple clusters (with a multi-cluster service mesh) can be executed using `cluster1_deploy.sh` and `cluster2_deploy.sh`.
 
+### Load Generator
+
+The load generator is deployed by default with a scale of 0.  To enable the load generator, just scale up the service:
+
+```
+kubectl -n acme-fitness scale deployment/loadgenerator --replicas=1
+```
+
+And scale it back down when done:
+
+```
+kubectl -n acme-fitness scale deployment/loadgenerator --replicas=0
+```
+
+
 ## Datastore Dependent Services
 
 This section covers the deployment of the datastore dependent microservices. It is recommended to deploy these services first.

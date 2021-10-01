@@ -48,7 +48,7 @@ spec:
         - name: USERS_HOST
           value: 'users'
         - name: CATALOG_HOST
-          value: 'catalog'
+          value: 'catalog.gns.mbentley'
         - name: ORDER_HOST
           value: 'order'
         - name: CART_HOST
@@ -68,28 +68,3 @@ spec:
         ports:
         - containerPort: 3000
           name: frontend
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: frontend
-  annotations:
-    cert-manager.io/cluster-issuer: "zerossl"
-    ingress.kubernetes.io/force-ssl-redirect: "false"
-    kubernetes.io/ingress.class: "contour"
-spec:
-  tls:
-  - hosts:
-    - acme-fitness.home-wl1.tkg.vmware.work.mbentley.net
-    secretName: acme-fitness.home-wl1.tkg.vmware.work.mbentley.net
-  rules:
-  - host: acme-fitness.home-wl1.tkg.vmware.work.mbentley.net
-    http:
-      paths:
-        - pathType: Prefix
-          path: /
-          backend:
-            service:
-              name: frontend
-              port:
-                number: 80

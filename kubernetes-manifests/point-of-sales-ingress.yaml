@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pos
+  annotations:
+    cert-manager.io/cluster-issuer: "zerossl"
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: "contour"
+spec:
+  tls:
+  - hosts:
+    - acme-fitness-pos.home-wl1.tkg.vmware.work.mbentley.net
+    secretName: acme-fitness-pos.home-wl1.tkg.vmware.work.mbentley.net
+  rules:
+  - host: acme-fitness-pos.home-wl1.tkg.vmware.work.mbentley.net
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: pos
+              port:
+                number: 7777

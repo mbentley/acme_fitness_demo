@@ -8,6 +8,16 @@ This app is developed by team behind www.cloudjourney.io
 
 The current version of the application passes JSON Web Tokens (JWT) for authentication on certain API calls. The application will not work as expected if the `users` service is not present to issue / authenticate these tokens.
 
+## Quick Deployments
+
+### Single Cluster
+
+Deployment to a single cluster can executed using `single_cluster_deploy.sh`.
+
+### Multi-Cluster
+
+Deployment to multiple clusters (with a multi-cluster service mesh) can be executed using `cluster1_deploy.sh` and `cluster2_deploy.sh`.
+
 ## Datastore Dependent Services
 
 This section covers the deployment of the datastore dependent microservices. It is recommended to deploy these services first.

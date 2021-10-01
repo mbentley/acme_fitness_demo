@@ -4,7 +4,7 @@ metadata:
   name: frontend
   annotations:
     cert-manager.io/cluster-issuer: "zerossl"
-    ingress.kubernetes.io/force-ssl-redirect: "false"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/ingress.class: "contour"
 spec:
   tls:
@@ -16,3 +16,9 @@ spec:
     http:
       paths:
         - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: frontend
+              port:
+                number: 80

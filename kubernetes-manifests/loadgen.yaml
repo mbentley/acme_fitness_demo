@@ -44,7 +44,7 @@ spec:
           value: "frontend:80"
       containers:
       - name: main
-        image: docker.io/vmwareallspark/acme-load-gen:latest
+        image: docker.io/mbentley/acme-traffic-generator:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8089
